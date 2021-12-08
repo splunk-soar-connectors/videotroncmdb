@@ -107,8 +107,9 @@ class VideotronCmdbConnector(BaseConnector):
                 self._auth_token = r.headers['Authentication-Token']
                 return RetVal(phantom.APP_SUCCESS, None)
             else:
-                return RetVal(action_result.set_status(phantom.APP_SUCCESS, 
-                'Unable to retrieve Authentication-Token from returned headers.'), None)
+                return RetVal(action_result.set_status(
+                    phantom.APP_SUCCESS, 'Unable to retrieve Authentication-Token from returned headers.'
+                    ), None)
 
         # Process each 'Content-Type' of response separately
 
