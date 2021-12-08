@@ -107,7 +107,8 @@ class VideotronCmdbConnector(BaseConnector):
                 self._auth_token = r.headers['Authentication-Token']
                 return RetVal(phantom.APP_SUCCESS, None)
             else:
-                return RetVal(action_result.set_status(phantom.APP_SUCCESS, 'Unable to retrieve Authentication-Token from returned headers.'), None)
+                return RetVal(action_result.set_status(phantom.APP_SUCCESS,\
+                    'Unable to retrieve Authentication-Token from returned headers.'), None)
 
         # Process each 'Content-Type' of response separately
 
@@ -197,7 +198,8 @@ class VideotronCmdbConnector(BaseConnector):
         r = requests.post(
             f'{self._base_url}/baocdp/rest/logout',
             verify=self._verify_ssl,
-            headers=headers
+            headers=headers,
+            timeout=60
         )
         try:
             r.raise_for_status()
@@ -368,7 +370,6 @@ def main():
     argparser.add_argument('-u', '--username', help='username', required=False)
     argparser.add_argument('-p', '--password', help='password', required=False)
     argparser.add_argument('-v', '--verify', action='store_true', help='verify', required=False, default=False)
-
 
     args = argparser.parse_args()
     session_id = None
