@@ -203,11 +203,10 @@ class VideotronCmdbConnector(BaseConnector):
         headers = {
             'Authentication-Token': self._auth_token
         }
-        r = requests.post(
+        r = requests.post(  # nosemgrep
             f'{self._base_url}/baocdp/rest/logout',
             verify=self._verify_ssl,
             headers=headers,
-            timeout=60
         )
         try:
             r.raise_for_status()
